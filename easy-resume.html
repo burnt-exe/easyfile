@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy Resume | Career CRM + ATS Resume Builder</title>
+  <meta name="description" content="Build ATS-ready resumes, match job descriptions and track job applications with Easy Resume.">
+  <link rel="icon" href="icon.png" type="image/png">
+  <style>
+    :root{--blue:#2563eb;--blue2:#1d4ed8;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#f8fafc;--card:#fff;--green:#16a34a;--red:#dc2626;--amber:#d97706;--purple:#7c3aed}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:inherit}.container{max-width:1240px;margin:auto;padding:0 18px}.topbar{background:#0f172a;color:white;position:sticky;top:0;z-index:30;box-shadow:0 3px 12px rgba(15,23,42,.18)}
+    .nav{display:flex;align-items:center;gap:18px;min-height:64px;overflow:auto}.brand{font-weight:900;text-decoration:none;white-space:nowrap}.nav a{font-size:14px;text-decoration:none;white-space:nowrap;opacity:.9}.nav a:hover,.nav a.active{opacity:1;text-decoration:underline}.spacer{flex:1}.privacy{font-size:12px;background:#1e293b;padding:7px 10px;border-radius:999px;white-space:nowrap}
+    .hero{padding:34px 0 22px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--blue)}h1{font-size:clamp(30px,5vw,50px);line-height:1.05;margin:6px 0 10px}.lead{color:var(--muted);max-width:780px;font-size:17px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:7px}.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--blue2)}.btn-light{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn-danger{background:var(--red);color:#fff}.btn-green{background:var(--green);color:#fff}.btn-small{padding:7px 10px;font-size:12px}.btn:disabled{opacity:.5;cursor:not-allowed}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 26px}.kpi{background:white;border:1px solid var(--line);border-radius:14px;padding:16px}.kpi b{font-size:26px;display:block;margin-top:4px}.kpi span{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}.view{display:none}.view.active{display:block}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(15,23,42,.04);padding:18px;margin-bottom:18px}.card h2,.card h3{margin-top:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.section-head p{margin:3px 0 0;color:var(--muted);font-size:13px}
+    label{display:block;font-size:12px;font-weight:900;color:#475569;margin-bottom:6px}.field{margin-bottom:12px}input,textarea,select{width:100%;border:1px solid #cbd5e1;border-radius:9px;padding:10px 11px;font:inherit;background:#fff;color:var(--ink)}textarea{min-height:95px;resize:vertical}input:focus,textarea:focus,select:focus{outline:3px solid rgba(37,99,235,.12);border-color:var(--blue)}.hint{font-size:12px;color:var(--muted)}
+    .row-card{border:1px solid var(--line);background:#f8fafc;border-radius:12px;padding:12px;margin-bottom:10px}.row-actions{display:flex;justify-content:flex-end;margin-top:8px}.split{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .resume-preview{background:white;border:1px solid var(--line);box-shadow:0 12px 35px rgba(15,23,42,.08);padding:36px;min-height:820px;border-radius:6px}.resume-preview h2{font-size:34px;margin:0}.resume-preview .headline{font-size:18px;color:var(--blue);font-weight:800;margin:2px 0}.resume-preview .contact{font-size:12px;color:#475569;margin:8px 0 22px}.resume-preview h3{font-size:13px;text-transform:uppercase;letter-spacing:.12em;border-bottom:1px solid #cbd5e1;padding-bottom:5px;margin-top:22px}.resume-preview ul{padding-left:19px}.resume-preview li{margin:4px 0}.resume-preview .entry{margin:12px 0}.resume-preview .entry strong{display:block}.resume-preview .entry small{color:var(--muted)}
+    .score-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.score{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) calc(var(--score)*1%),#e2e8f0 0);position:relative}.score:after{content:"";position:absolute;inset:12px;background:white;border-radius:50%}.score b{position:relative;z-index:1;font-size:29px}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{font-size:12px;font-weight:800;border-radius:999px;padding:6px 9px;background:#e2e8f0}.chip.missing{background:#fee2e2;color:#991b1b}.chip.found{background:#dcfce7;color:#166534}.recommendations{margin:0;padding-left:18px}.recommendations li{margin:7px 0}
+    .pipeline{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px}.stage{background:#f1f5f9;border-radius:12px;padding:11px;text-align:center}.stage b{font-size:20px;display:block}.stage span{font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f8fafc;color:#475569;font-size:11px;text-transform:uppercase;letter-spacing:.05em}.status{font-weight:900;font-size:11px;border-radius:999px;padding:5px 8px;background:#e2e8f0;white-space:nowrap}.empty{text-align:center;color:var(--muted);padding:24px}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap}.notice{border-left:4px solid var(--blue);background:#eff6ff;padding:12px 14px;border-radius:8px;font-size:13px;margin-bottom:14px}.danger-note{border-left-color:var(--amber);background:#fffbeb}.version-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}.version-row select{flex:1}
+    footer{padding:40px 0;color:var(--muted);font-size:12px}.mobile-only{display:none}
+    @media(max-width:900px){.grid,.grid-3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.pipeline{grid-template-columns:repeat(3,1fr)}.resume-preview{min-height:0;padding:22px}.nav{gap:13px}.privacy{display:none}.mobile-only{display:inline-flex}}
+    @media(max-width:540px){.kpis{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.resume-preview h2{font-size:28px}}
+    @media print{.no-print,.topbar,.hero,.kpis,.tabs,footer{display:none!important}body{background:#fff}.container{max-width:none;padding:0}#builderView{display:block!important}.grid{display:block}.editor-pane{display:none!important}.preview-pane{display:block!important}.resume-preview{border:0;box-shadow:none;padding:0;min-height:auto}}
+  </style>
+</head>
+<body>
+  <nav class="topbar no-print">
+    <div class="container nav">
+      <a class="brand" href="index.html">EasyFile</a>
+      <a href="index.html#modules">Modules</a>
+      <a href="easy-resume.html" class="active">Easy Resume</a>
+      <a href="easy-crm.html">CRM</a>
+      <span class="spacer"></span>
+      <span class="privacy">Local-first • Browser storage</span>
+    </div>
+  </nav>
+
+  <header class="hero no-print">
+    <div class="container">
+      <div class="eyebrow">Career workspace</div>
+      <h1>Easy Resume</h1>
+      <p class="lead">A career CRM + ATS resume builder. Maintain one master career profile, create targeted resume versions, measure job-description fit and track every application from interest to offer.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="switchTab('builder')">Build Resume</button>
+        <button class="btn btn-light" onclick="switchTab('ats')">Run ATS Match</button>
+        <button class="btn btn-light" onclick="switchTab('applications')">Track Applications</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="kpis no-print">
+      <div class="kpi"><span>Resume versions</span><b id="kpiVersions">0</b></div>
+      <div class="kpi"><span>Applications</span><b id="kpiApplications">0</b></div>
+      <div class="kpi"><span>Best ATS match</span><b id="kpiATS">—</b></div>
+      <div class="kpi"><span>Interviews / offers</span><b id="kpiProgress">0</b></div>
+    </section>
+
+    <div class="tabs no-print" role="tablist">
+      <button class="tab active" data-tab="builder" onclick="switchTab('builder')">Resume Builder</button>
+      <button class="tab" data-tab="ats" onclick="switchTab('ats')">ATS Match</button>
+      <button class="tab" data-tab="applications" onclick="switchTab('applications')">Career CRM</button>
+      <button class="tab" data-tab="data" onclick="switchTab('data')">Backup & Data</button>
+    </div>
+
+    <section id="builderView" class="view active">
+      <div class="grid">
+        <div class="editor-pane">
+          <div class="card no-print">
+            <div class="section-head"><div><h2>Resume versions</h2><p>Create targeted copies without changing your master profile.</p></div></div>
+            <div class="version-row">
+              <select id="versionSelect" onchange="loadSelectedVersion()"></select>
+              <button class="btn btn-light btn-small" onclick="saveVersion()">Save version</button>
+              <button class="btn btn-light btn-small" onclick="duplicateVersion()">Duplicate</button>
+              <button class="btn btn-danger btn-small" onclick="deleteVersion()">Delete</button>
+            </div>
+            <div class="field"><label>Version name</label><input id="versionName" placeholder="e.g. Azure Solutions Architect"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-head"><div><h2>Master profile</h2><p>Core identity used across targeted resume versions.</p></div></div>
+            <div class="split">
+              <div class="field"><label>Full name</label><input id="fullName" placeholder="Your full name"></div>
+              <div class="field"><label>Professional headline</label><input id="headline" placeholder="Cloud Architect | AI | Security"></div>
+            </div>
+            <div class="split">
+              <div class="field"><label>Email</label><input id="email" type="email" placeholder="name@example.com"></div>
+              <div class="field"><label>Phone</label><input id="phone" placeholder="+27 ..."></div>
+            </div>
+            <div class="split">
+              <div class="field"><label>Location</label><input id="location" placeholder="Centurion, South Africa"></div>
+              <div class="field"><label>LinkedIn / Portfolio</label><input id="portfolio" placeholder="https://..."></div>
+            </div>
+            <div class="field"><label>Professional summary</label><textarea id="summary" placeholder="Concise, achievement-led professional profile..."></textarea><div class="hint">Use role-specific language and avoid unsupported metrics.</div></div>
+            <div class="field"><label>Skills</label><textarea id="skills" placeholder="Azure, AI, cybersecurity, solution architecture, stakeholder management"></textarea><div class="hint">Comma-separated. ATS matching compares these plus your experience against the job description.</div></div>
+          </div>
+
+          <div class="card">
+            <div class="section-head"><div><h2>Experience</h2><p>Use action + outcome bullets. Do not invent results or metrics.</p></div><button class="btn btn-primary btn-small no-print" onclick="addExperience()">+ Experience</button></div>
+            <div id="experienceRows"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-head"><div><h2>Education</h2><p>Qualifications, institutions and dates.</p></div><button class="btn btn-primary btn-small no-print" onclick="addEducation()">+ Education</button></div>
+            <div id="educationRows"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-head"><div><h2>Certifications</h2><p>Structured credentials with verification links.</p></div><button class="btn btn-primary btn-small no-print" onclick="addCertification()">+ Certification</button></div>
+            <div id="certRows"></div>
+          </div>
+
+          <div class="toolbar no-print" style="margin-bottom:18px">
+            <button class="btn btn-primary" onclick="saveAll()">Save locally</button>
+            <button class="btn btn-green" onclick="window.print()">Print / Save PDF</button>
+            <button class="btn btn-light" onclick="exportTextResume()">Export ATS text</button>
+          </div>
+        </div>
+
+        <div class="preview-pane">
+          <div class="card no-print"><strong>Live preview</strong><div class="hint">Clean, single-column output prioritised for ATS readability.</div></div>
+          <article id="resumePreview" class="resume-preview"></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="atsView" class="view no-print">
+      <div class="grid">
+        <div>
+          <div class="card">
+            <div class="section-head"><div><h2>Job description matcher</h2><p>Paste the complete job description to compare it against the active resume.</p></div></div>
+            <div class="field"><label>Job title</label><input id="atsJobTitle" placeholder="e.g. Azure Solutions Architect"></div>
+            <div class="field"><label>Job description</label><textarea id="jobDescription" style="min-height:320px" placeholder="Paste responsibilities, required skills, preferred certifications and qualifications..."></textarea></div>
+            <button class="btn btn-primary" onclick="runATS()">Analyse match</button>
+          </div>
+          <div class="notice danger-note">ATS scoring is an on-device heuristic for guidance, not a guarantee of employer or ATS-system outcomes. It does not fabricate qualifications or experience.</div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="section-head"><div><h2>Match analysis</h2><p>Keyword coverage + resume completeness + contact/structure checks.</p></div></div>
+            <div class="score-wrap">
+              <div class="score" id="scoreCircle" style="--score:0"><b id="scoreValue">0%</b></div>
+              <div><div class="hint">Keyword coverage</div><strong id="keywordCoverage">0 / 0</strong><br><br><div class="hint">Resume completeness</div><strong id="completenessScore">0%</strong></div>
+            </div>
+          </div>
+          <div class="card"><h3>Matched keywords</h3><div class="chips" id="foundKeywords"><span class="hint">Run an analysis first.</span></div></div>
+          <div class="card"><h3>Missing / weak keywords</h3><div class="chips" id="missingKeywords"><span class="hint">Run an analysis first.</span></div></div>
+          <div class="card"><h3>Recommendations</h3><ul id="atsRecommendations" class="recommendations"><li>Complete your master profile, then analyse a target job.</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="applicationsView" class="view no-print">
+      <div class="pipeline" id="pipeline"></div>
+      <div class="grid">
+        <div class="card">
+          <div class="section-head"><div><h2>Add / update application</h2><p>Track roles, resume variants, follow-ups and progression.</p></div></div>
+          <input id="appId" type="hidden">
+          <div class="split">
+            <div class="field"><label>Company</label><input id="appCompany" placeholder="Company"></div>
+            <div class="field"><label>Role</label><input id="appRole" placeholder="Job title"></div>
+          </div>
+          <div class="split">
+            <div class="field"><label>Status</label><select id="appStatus"><option>Interested</option><option>Preparing</option><option>Applied</option><option>Screening</option><option>Interview</option><option>Offer</option><option>Accepted</option><option>Rejected</option></select></div>
+            <div class="field"><label>Application date</label><input id="appDate" type="date"></div>
+          </div>
+          <div class="split">
+            <div class="field"><label>Resume version</label><select id="appResume"></select></div>
+            <div class="field"><label>Follow-up date</label><input id="appFollowup" type="date"></div>
+          </div>
+          <div class="field"><label>Job URL</label><input id="appUrl" placeholder="https://..."></div>
+          <div class="field"><label>Recruiter / contact</label><input id="appContact" placeholder="Name, email or phone"></div>
+          <div class="field"><label>Notes</label><textarea id="appNotes" placeholder="Interview notes, salary, next action, decision-maker..."></textarea></div>
+          <div class="toolbar"><button class="btn btn-primary" onclick="saveApplication()">Save application</button><button class="btn btn-light" onclick="clearApplicationForm()">Clear</button></div>
+        </div>
+        <div class="card">
+          <div class="section-head"><div><h2>Application pipeline</h2><p>Your career CRM history stays in this browser unless exported.</p></div><button class="btn btn-light btn-small" onclick="exportApplicationsCSV()">Export CSV</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Company / role</th><th>Status</th><th>Resume</th><th>Follow-up</th><th>Actions</th></tr></thead><tbody id="applicationRows"></tbody></table></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dataView" class="view no-print">
+      <div class="grid">
+        <div class="card">
+          <h2>Backup & restore</h2>
+          <p class="hint">Easy Resume stores data locally in your browser. Export a backup before clearing site data or changing devices.</p>
+          <div class="toolbar"><button class="btn btn-primary" onclick="exportBackup()">Download JSON backup</button><button class="btn btn-light" onclick="document.getElementById('importFile').click()">Restore backup</button><input id="importFile" type="file" accept="application/json,.json" hidden onchange="importBackup(event)"></div>
+        </div>
+        <div class="card">
+          <h2>Privacy controls</h2>
+          <p class="hint">Resume and application data remains client-side. The current module does not send resume content to an AI or external API.</p>
+          <button class="btn btn-danger" onclick="clearAllData()">Delete Easy Resume local data</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container no-print">Easy Resume • Career CRM + ATS resume builder • Local-first EasyFile module</footer>
+
+<script>
+const PROFILE_KEY='easy.resume.profile.v1', VERSION_KEY='easy.resume.versions.v1', APP_KEY='easy.resume.applications.v1', ATS_KEY='easy.resume.bestats.v1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const today=()=>new Date().toISOString().slice(0,10);
+let profile={experience:[],education:[],certifications:[]}; let versions=[]; let applications=[];
+function uid(){return Date.now()+Math.floor(Math.random()*9999)}
+function loadJSON(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}}
+function toast(msg){alert(msg)}
+function switchTab(name){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));$(name+'View').classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function collectProfile(){return {fullName:$('fullName').value.trim(),headline:$('headline').value.trim(),email:$('email').value.trim(),phone:$('phone').value.trim(),location:$('location').value.trim(),portfolio:$('portfolio').value.trim(),summary:$('summary').value.trim(),skills:$('skills').value.trim(),experience:readGroup('experienceRows',['company','role','start','end','bullets']),education:readGroup('educationRows',['institution','qualification','start','end']),certifications:readGroup('certRows',['name','issuer','date','url'])}}
+function readGroup(container,fields){return [...$(container).querySelectorAll('.row-card')].map(row=>Object.fromEntries(fields.map(f=>[f,row.querySelector(`[data-field="${f}"]`)?.value.trim()||''])))}
+function applyProfile(p){profile=p||{};['fullName','headline','email','phone','location','portfolio','summary','skills'].forEach(k=>$(k).value=p?.[k]||'');$('experienceRows').innerHTML='';(p?.experience||[]).forEach(addExperience);$('educationRows').innerHTML='';(p?.education||[]).forEach(addEducation);$('certRows').innerHTML='';(p?.certifications||[]).forEach(addCertification);renderPreview()}
+function field(label,name,value='',type='text'){return `<div class="field"><label>${label}</label><input data-field="${name}" type="${type}" value="${esc(value)}"></div>`}
+function addExperience(x={}){const d=document.createElement('div');d.className='row-card';d.innerHTML=`<div class="split">${field('Company','company',x.company)}${field('Role','role',x.role)}</div><div class="split">${field('Start','start',x.start,'month')}${field('End / Present','end',x.end)}</div><div class="field"><label>Achievement bullets</label><textarea data-field="bullets" placeholder="One bullet per line">${esc(x.bullets||'')}</textarea></div><div class="row-actions no-print"><button class="btn btn-danger btn-small">Remove</button></div>`;wireRow(d);$('experienceRows').appendChild(d);renderPreview()}
+function addEducation(x={}){const d=document.createElement('div');d.className='row-card';d.innerHTML=`<div class="split">${field('Institution','institution',x.institution)}${field('Qualification','qualification',x.qualification)}</div><div class="split">${field('Start','start',x.start)}${field('End','end',x.end)}</div><div class="row-actions no-print"><button class="btn btn-danger btn-small">Remove</button></div>`;wireRow(d);$('educationRows').appendChild(d);renderPreview()}
+function addCertification(x={}){const d=document.createElement('div');d.className='row-card';d.innerHTML=`<div class="split">${field('Certification','name',x.name)}${field('Issuer','issuer',x.issuer)}</div><div class="split">${field('Issue date','date',x.date)}${field('Verification URL','url',x.url)}</div><div class="row-actions no-print"><button class="btn btn-danger btn-small">Remove</button></div>`;wireRow(d);$('certRows').appendChild(d);renderPreview()}
+function wireRow(row){row.querySelector('.btn-danger').onclick=()=>{row.remove();renderPreview()};row.querySelectorAll('input,textarea').forEach(i=>i.addEventListener('input',renderPreview))}
+function resumeText(p=collectProfile()){return [p.fullName,p.headline,p.summary,p.skills,...p.experience.flatMap(e=>[e.company,e.role,e.bullets]),...p.education.flatMap(e=>[e.institution,e.qualification]),...p.certifications.flatMap(c=>[c.name,c.issuer])].join(' ')}
+function renderPreview(){const p=collectProfile();const skills=p.skills.split(',').map(x=>x.trim()).filter(Boolean);$('resumePreview').innerHTML=`<h2>${esc(p.fullName||'Your Name')}</h2><div class="headline">${esc(p.headline||'Professional Headline')}</div><div class="contact">${[p.location,p.phone,p.email,p.portfolio].filter(Boolean).map(esc).join(' • ')}</div>${p.summary?`<h3>Professional Summary</h3><p>${esc(p.summary)}</p>`:''}${skills.length?`<h3>Core Skills</h3><p>${skills.map(esc).join(' • ')}</p>`:''}${p.experience.length?`<h3>Professional Experience</h3>${p.experience.map(e=>`<div class="entry"><strong>${esc(e.role||'Role')} — ${esc(e.company||'Company')}</strong><small>${esc([e.start,e.end].filter(Boolean).join(' – '))}</small>${e.bullets?`<ul>${e.bullets.split(/\n+/).filter(Boolean).map(b=>`<li>${esc(b)}</li>`).join('')}</ul>`:''}</div>`).join('')}`:''}${p.education.length?`<h3>Education</h3>${p.education.map(e=>`<div class="entry"><strong>${esc(e.qualification)}</strong><span>${esc(e.institution)}</span><br><small>${esc([e.start,e.end].filter(Boolean).join(' – '))}</small></div>`).join('')}`:''}${p.certifications.length?`<h3>Certifications</h3>${p.certifications.map(c=>`<div class="entry"><strong>${esc(c.name)}</strong><span>${esc(c.issuer)}${c.date?' • '+esc(c.date):''}</span></div>`).join('')}`:''}`}
+function saveAll(){profile=collectProfile();localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));renderPreview();toast('Easy Resume profile saved locally.')}
+function saveVersion(){const name=$('versionName').value.trim()||'Resume '+(versions.length+1);const existing=versions.find(v=>v.id==$('versionSelect').value);const data=collectProfile();if(existing){existing.name=name;existing.profile=data;existing.updated=new Date().toISOString()}else{versions.push({id:uid(),name,profile:data,updated:new Date().toISOString()})}localStorage.setItem(VERSION_KEY,JSON.stringify(versions));refreshVersions();$('versionSelect').value=versions[versions.length-1]?.id||'';refreshKPIs();toast('Resume version saved.')}
+function duplicateVersion(){const v=versions.find(v=>v.id==$('versionSelect').value);const source=v?.profile||collectProfile();versions.push({id:uid(),name:(v?.name||'Resume')+' Copy',profile:JSON.parse(JSON.stringify(source)),updated:new Date().toISOString()});localStorage.setItem(VERSION_KEY,JSON.stringify(versions));refreshVersions();$('versionSelect').value=versions[versions.length-1].id;loadSelectedVersion()}
+function deleteVersion(){const id=$('versionSelect').value;if(!id)return;if(!confirm('Delete this saved resume version?'))return;versions=versions.filter(v=>String(v.id)!==String(id));localStorage.setItem(VERSION_KEY,JSON.stringify(versions));refreshVersions();refreshKPIs()}
+function refreshVersions(){const sel=$('versionSelect'), app=$('appResume');const opts='<option value="">Master profile</option>'+versions.map(v=>`<option value="${v.id}">${esc(v.name)}</option>`).join('');sel.innerHTML=opts;app.innerHTML=opts}
+function loadSelectedVersion(){const v=versions.find(v=>String(v.id)===String($('versionSelect').value));if(v){$('versionName').value=v.name;applyProfile(v.profile)}else{$('versionName').value='';applyProfile(loadJSON(PROFILE_KEY,{experience:[],education:[],certifications:[]}))}}
+const STOP=new Set('the and with from that this your you our are for into will have has had job role work team teams who but not all any can may using use used their they them his her she he its about across within over under more most other such including required preferred responsibilities responsibility skills skill experience experienced knowledge strong ability excellent years year degree qualification qualifications candidate candidates position company business'.split(' '));
+function tokens(text){return String(text||'').toLowerCase().replace(/https?:\/\/\S+/g,' ').replace(/[^a-z0-9+#.\- ]/g,' ').split(/\s+/).map(x=>x.replace(/^[.\-]+|[.\-]+$/g,'')).filter(x=>x.length>2&&!STOP.has(x)&&!/^[0-9]+$/.test(x))}
+function runATS(){const jd=$('jobDescription').value.trim();if(!jd)return toast('Paste a job description first.');const p=collectProfile(), rset=new Set(tokens(resumeText(p))), counts={};tokens(jd).forEach(t=>counts[t]=(counts[t]||0)+1);const key=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,35).map(x=>x[0]);const found=key.filter(k=>rset.has(k)), missing=key.filter(k=>!rset.has(k));const keyword=key.length?Math.round(found.length/key.length*100):0;const checks=[p.fullName,p.email,p.phone,p.headline,p.summary,p.skills,p.experience.length,p.education.length];const complete=Math.round(checks.filter(Boolean).length/checks.length*100);const score=Math.round(keyword*.75+complete*.25);$('scoreCircle').style.setProperty('--score',score);$('scoreValue').textContent=score+'%';$('keywordCoverage').textContent=`${found.length} / ${key.length}`;$('completenessScore').textContent=complete+'%';$('foundKeywords').innerHTML=found.length?found.map(x=>`<span class="chip found">${esc(x)}</span>`).join(''):'<span class="hint">No high-signal matches found.</span>';$('missingKeywords').innerHTML=missing.length?missing.slice(0,18).map(x=>`<span class="chip missing">${esc(x)}</span>`).join(''):'<span class="hint">No major keyword gaps found.</span>';const rec=[];if(complete<90)rec.push('Complete missing resume fields before applying.');if(missing.length)rec.push('Review missing keywords and add only those that truthfully describe your experience, skills or certifications.');if(!p.experience.some(e=>/\d/.test(e.bullets||'')))rec.push('Where factual, add measurable outcomes to achievement bullets.');if((p.summary||'').length>700)rec.push('Shorten the professional summary for faster scanning.');if(p.experience.some(e=>(e.bullets||'').split(/\n+/).filter(Boolean).length>7))rec.push('Reduce dense experience sections to the most relevant achievements.');if(score>=85)rec.push('Strong match. Prioritise evidence for the most important matched requirements in the top half of the resume.');$('atsRecommendations').innerHTML=rec.map(x=>`<li>${esc(x)}</li>`).join('')||'<li>Resume is reasonably complete; verify all claims and formatting before submitting.</li>';const best=Math.max(Number(localStorage.getItem(ATS_KEY)||0),score);localStorage.setItem(ATS_KEY,String(best));refreshKPIs()}
+const PIPE=['Interested','Preparing','Applied','Screening','Interview','Offer'];
+function saveApplication(){const company=$('appCompany').value.trim(),role=$('appRole').value.trim();if(!company||!role)return toast('Company and role are required.');const id=$('appId').value||uid();const rec={id,company,role,status:$('appStatus').value,date:$('appDate').value,resume:$('appResume').value,followup:$('appFollowup').value,url:$('appUrl').value.trim(),contact:$('appContact').value.trim(),notes:$('appNotes').value.trim()};const i=applications.findIndex(a=>String(a.id)===String(id));if(i>=0)applications[i]=rec;else applications.unshift(rec);localStorage.setItem(APP_KEY,JSON.stringify(applications));clearApplicationForm();renderApplications();refreshKPIs()}
+function clearApplicationForm(){$('appId').value='';['appCompany','appRole','appFollowup','appUrl','appContact','appNotes'].forEach(id=>$(id).value='');$('appStatus').value='Interested';$('appDate').value=today();$('appResume').value=''}
+function editApplication(id){const a=applications.find(a=>String(a.id)===String(id));if(!a)return;$('appId').value=a.id;$('appCompany').value=a.company;$('appRole').value=a.role;$('appStatus').value=a.status;$('appDate').value=a.date||'';$('appResume').value=a.resume||'';$('appFollowup').value=a.followup||'';$('appUrl').value=a.url||'';$('appContact').value=a.contact||'';$('appNotes').value=a.notes||'';window.scrollTo({top:0,behavior:'smooth'})}
+function deleteApplication(id){if(!confirm('Delete this application record?'))return;applications=applications.filter(a=>String(a.id)!==String(id));localStorage.setItem(APP_KEY,JSON.stringify(applications));renderApplications();refreshKPIs()}
+function renderApplications(){$('pipeline').innerHTML=PIPE.map(s=>`<div class="stage"><b>${applications.filter(a=>a.status===s).length}</b><span>${s}</span></div>`).join('');const rows=$('applicationRows');if(!applications.length){rows.innerHTML='<tr><td colspan="5" class="empty">No applications yet.</td></tr>';return}rows.innerHTML=applications.map(a=>{const v=versions.find(v=>String(v.id)===String(a.resume));return `<tr><td><strong>${esc(a.company)}</strong><br>${esc(a.role)}${a.url?`<br><a href="${esc(a.url)}" target="_blank" rel="noopener">Job link</a>`:''}</td><td><span class="status">${esc(a.status)}</span></td><td>${esc(v?.name||'Master profile')}</td><td>${esc(a.followup||'—')}</td><td><div class="toolbar"><button class="btn btn-light btn-small" onclick="editApplication('${a.id}')">Edit</button><button class="btn btn-danger btn-small" onclick="deleteApplication('${a.id}')">Delete</button></div></td></tr>`}).join('')}
+function exportTextResume(){const p=collectProfile();const lines=[p.fullName,p.headline,[p.location,p.phone,p.email,p.portfolio].filter(Boolean).join(' | '),'','PROFESSIONAL SUMMARY',p.summary,'','CORE SKILLS',p.skills,'','PROFESSIONAL EXPERIENCE'];p.experience.forEach(e=>{lines.push('',`${e.role} — ${e.company}`,`${e.start} - ${e.end}`,...(e.bullets||'').split(/\n+/).filter(Boolean).map(b=>'• '+b))});lines.push('','EDUCATION');p.education.forEach(e=>lines.push(`${e.qualification} — ${e.institution} (${e.start} - ${e.end})`));lines.push('','CERTIFICATIONS');p.certifications.forEach(c=>lines.push(`${c.name} — ${c.issuer}${c.date?' ('+c.date+')':''}`));downloadBlob(lines.join('\n'),'easy-resume-ats.txt','text/plain')}
+function exportApplicationsCSV(){const head=['Company','Role','Status','ApplicationDate','ResumeVersion','Followup','JobURL','Contact','Notes'];const lines=applications.map(a=>[a.company,a.role,a.status,a.date,versions.find(v=>String(v.id)===String(a.resume))?.name||'Master profile',a.followup,a.url,a.contact,a.notes].map(csv).join(','));downloadBlob([head.join(','),...lines].join('\n'),'easy-resume-applications.csv','text/csv')}
+function csv(v){return '"'+String(v??'').replaceAll('"','""')+'"'}
+function exportBackup(){const data={schema:'easy.resume.backup.v1',exportedAt:new Date().toISOString(),profile:collectProfile(),versions,applications,bestATS:Number(localStorage.getItem(ATS_KEY)||0)};downloadBlob(JSON.stringify(data,null,2),'easy-resume-backup.json','application/json')}
+function importBackup(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.profile||!Array.isArray(d.applications||[]))throw new Error('Invalid backup');localStorage.setItem(PROFILE_KEY,JSON.stringify(d.profile));localStorage.setItem(VERSION_KEY,JSON.stringify(d.versions||[]));localStorage.setItem(APP_KEY,JSON.stringify(d.applications||[]));localStorage.setItem(ATS_KEY,String(d.bestATS||0));init();toast('Backup restored.')}catch(err){toast('Could not restore this backup: '+err.message)}};r.readAsText(f);e.target.value=''}
+function clearAllData(){if(!confirm('Delete all Easy Resume profile, versions, ATS score and application data from this browser?'))return;[PROFILE_KEY,VERSION_KEY,APP_KEY,ATS_KEY].forEach(k=>localStorage.removeItem(k));init()}
+function downloadBlob(content,name,type){const blob=new Blob([content],{type:type+';charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},0)}
+function refreshKPIs(){$('kpiVersions').textContent=versions.length;$('kpiApplications').textContent=applications.length;const best=Number(localStorage.getItem(ATS_KEY)||0);$('kpiATS').textContent=best?best+'%':'—';$('kpiProgress').textContent=applications.filter(a=>['Interview','Offer','Accepted'].includes(a.status)).length}
+function bindLive(){['fullName','headline','email','phone','location','portfolio','summary','skills'].forEach(id=>$(id).addEventListener('input',renderPreview))}
+function init(){profile=loadJSON(PROFILE_KEY,{experience:[],education:[],certifications:[]});versions=loadJSON(VERSION_KEY,[]);applications=loadJSON(APP_KEY,[]);refreshVersions();applyProfile(profile);if(!$('experienceRows').children.length)addExperience();if(!$('educationRows').children.length)addEducation();if(!$('certRows').children.length)addCertification();clearApplicationForm();renderApplications();refreshKPIs();renderPreview()}
+bindLive();document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
